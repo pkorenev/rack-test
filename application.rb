@@ -5,6 +5,10 @@ class Application
     @application ||= Application.new
   end
 
+  def self.reset
+    @application = Application.new
+  end
+
   def initialize
     @routes = []
   end
@@ -22,7 +26,6 @@ class Application
   private
 
   def handle_request(url, method)
-    puts "method: #{method}"
     if route = find_route(url, method)
       response_body = route[:action].call || ''
       status  = 200
